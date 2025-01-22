@@ -111,10 +111,10 @@
 .headers off
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
-DROP TABLE IF EXISTS movie
-DROP TABLE IF EXISTS studio
-DROP TABLE IF EXISTS role
-DROP TABLE IF EXISTS actor
+DROP TABLE IF EXISTS movie;
+DROP TABLE IF EXISTS studio;
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS actor;
 
 -- Create new tables, according to your domain model
 CREATE TABLE movie (
@@ -122,30 +122,66 @@ CREATE TABLE movie (
     title TEXT,
     year INTEGER,
     rating INTEGER,
-    studio_id INTEGER
-)
-
-CREATE TABLE studio (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT
-)
-
-CREATE TABLE role (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    character TEXT,
-    movie_id INTEGER,
-    actor_id INTEGER
-)
+    studio TEXT
+);
 
 CREATE table actor (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name TEXT,
     last_name TEXT
-)
+);
+
+CREATE TABLE role (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    char_name TEXT,
+    movie_id INTEGER,
+    actor_id INTEGER
+);
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
--- TODO!
+
+--movie
+INSERT INTO movie (title, year, rating, studio)
+VALUES
+("Batman Begins",2005,"PG-13","Warner Bros."),
+("The Dark Knight",2008,"PG-13","Warner Bros."),
+("The Dark Knight Rises",2012,"PG-13","Warner Bros.");
+
+--actor
+INSERT INTO actor (first_name, last_name)
+VALUES
+("Christian","Bale"),
+("Michael","Caine"),
+("Liam","Neeson"),
+("Katie","Holmes"),
+("Gary","Oldman"),
+("Heath","Ledger"),
+("Aaron","Eckhart"),
+("Maggie","Gyllenhaal"),
+("Tom","Hardy"),
+("Joseph","Gordan-Levitt"),
+("Anne","Hathaway")
+
+--role
+INSERT INTO role (char_name, movie_id, actor_id)
+VALUES
+("Bruce Wayne",1,1)
+("Alfred",1,2)
+("Ra's Al Ghul",1,3)
+("Rachel Dawes",1,4)
+("Comissioner Gordon"1,5)
+("Bruce Wayne",2,1)
+("Joker",2,6)
+("Harvey Dent",2,7)
+("Alfred",2,2)
+("Rachel Dawes",2,8)
+("Bruce Wayne",3,1)
+("Comissioner Gordon",3,5)
+("Bane",3,9)
+("John Blake",3,10)
+("Selina Kyle",3,11)
+
 
 -- Prints a header for the movies output
 .print "Movies"
