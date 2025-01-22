@@ -112,7 +112,6 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 DROP TABLE IF EXISTS movie;
-DROP TABLE IF EXISTS studio;
 DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS actor;
 
@@ -127,8 +126,7 @@ CREATE TABLE movie (
 
 CREATE table actor (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name TEXT,
-    last_name TEXT
+    act_name TEXT,
 );
 
 CREATE TABLE role (
@@ -149,38 +147,38 @@ VALUES
 ("The Dark Knight Rises",2012,"PG-13","Warner Bros.");
 
 --actor
-INSERT INTO actor (first_name, last_name)
+INSERT INTO actor (act_name)
 VALUES
-("Christian","Bale"),
-("Michael","Caine"),
-("Liam","Neeson"),
-("Katie","Holmes"),
-("Gary","Oldman"),
-("Heath","Ledger"),
-("Aaron","Eckhart"),
-("Maggie","Gyllenhaal"),
-("Tom","Hardy"),
-("Joseph","Gordan-Levitt"),
-("Anne","Hathaway")
+("Christian Bale"),
+("Michael Caine"),
+("Liam Neeson"),
+("Katie Holmes"),
+("Gary Oldman"),
+("Heath Ledger"),
+("Aaron Eckhart"),
+("Maggie Gyllenhaal"),
+("Tom Hardy"),
+("Joseph Gorden-Levitt"),
+("Anne Hathaway");
 
 --role
 INSERT INTO role (char_name, movie_id, actor_id)
 VALUES
-("Bruce Wayne",1,1)
-("Alfred",1,2)
-("Ra's Al Ghul",1,3)
-("Rachel Dawes",1,4)
-("Comissioner Gordon"1,5)
-("Bruce Wayne",2,1)
-("Joker",2,6)
-("Harvey Dent",2,7)
-("Alfred",2,2)
-("Rachel Dawes",2,8)
-("Bruce Wayne",3,1)
-("Comissioner Gordon",3,5)
-("Bane",3,9)
-("John Blake",3,10)
-("Selina Kyle",3,11)
+("Bruce Wayne",1,1),
+("Alfred",1,2),
+("Ra's Al Ghul",1,3),
+("Rachel Dawes",1,4),
+("Comissioner Gordon"1,5),
+("Bruce Wayne",2,1),
+("Joker",2,6),
+("Harvey Dent",2,7),
+("Alfred",2,2),
+("Rachel Dawes",2,8),
+("Bruce Wayne",3,1),
+("Comissioner Gordon",3,5),
+("Bane",3,9),
+("John Blake",3,10),
+("Selina Kyle",3,11);
 
 
 -- Prints a header for the movies output
@@ -189,7 +187,7 @@ VALUES
 .print ""
 
 -- The SQL statement for the movies output
--- TODO!
+SELECT title, year, rating, studio FROM movie;
 
 -- Prints a header for the cast output
 .print ""
@@ -199,4 +197,7 @@ VALUES
 
 
 -- The SQL statement for the cast output
--- TODO!
+SELECT title, actor.act_name, role.char_name
+FROM role
+INNER JOIN actor ON actors.id = role.actor_id
+INNER JOIN movie ON movie.id = role.movie_id; 
