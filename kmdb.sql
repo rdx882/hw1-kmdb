@@ -126,7 +126,7 @@ CREATE TABLE movie (
 
 CREATE table actor (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    act_name TEXT,
+    act_name TEXT
 );
 
 CREATE TABLE role (
@@ -168,7 +168,7 @@ VALUES
 ("Alfred",1,2),
 ("Ra's Al Ghul",1,3),
 ("Rachel Dawes",1,4),
-("Comissioner Gordon"1,5),
+("Comissioner Gordon",1,5),
 ("Bruce Wayne",2,1),
 ("Joker",2,6),
 ("Harvey Dent",2,7),
@@ -197,7 +197,8 @@ SELECT title, year, rating, studio FROM movie;
 
 
 -- The SQL statement for the cast output
-SELECT title, actor.act_name, role.char_name
-FROM role
-INNER JOIN actor ON actors.id = role.actor_id
-INNER JOIN movie ON movie.id = role.movie_id; 
+SELECT movie.title, actor.act_name, role.char_name
+FROM
+    role
+        INNER JOIN actor ON actor.id = role.actor_id
+        INNER JOIN movie ON movie.id = role.movie_id; 
